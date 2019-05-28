@@ -109,7 +109,7 @@ class MyAdminIndexView(admin.AdminIndexView):
 
 		if login.current_user.is_authenticated:
 			return redirect(url_for('.index'))
-		link = '<p>Don\'t have an account? <a href="' + url_for('.register_view') + '">Click here to register.</a></p>'
+		#link = '<p>Don\'t have an account? <a href="' + url_for('.register_view') + '">Click here to register.</a></p>'
 		self._template_args['form'] = form
 		self._template_args['link'] = link
 		return super(MyAdminIndexView, self).index()
@@ -162,6 +162,7 @@ class Staff(db.Model):
 	name = db.Column(db.String(50), nullable=False, unique=True)
 	password = db.Column(db.String(50), nullable=False)
 	email = db.Column(db.String(50), nullable=False)
+	login = db.Column(db.String(100), nullable=False, unique=True)
 	manage = db.relationship('Manage', backref='staff', lazy=True)
 	
 	def __str__(self):
